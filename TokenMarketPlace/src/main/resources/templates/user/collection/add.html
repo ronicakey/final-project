@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новая коллекции</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<div class="main-form-container">
+  <h3>Новая коллекция</h3>
+  <form class="login-container" th:method="POST" th:action="@{/user/collection/new}" th:object="${collection}" enctype="multipart/form-data">
+      <div class="row-container">
+          <label for="title">Название: </label>
+          <div class="col-container">
+              <input type="text" th:field="*{title}" placeholder="Название" id="title" required>
+          </div>
+      </div>
+      <div class="error-container" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+      </div>
+      <div class="row-container">
+          <label for="description">Описание: </label>
+          <div class="col-container">
+              <textarea th:field="*{description}" placeholder="Описание" id="description" required></textarea>
+          </div>
+      </div>
+      <div class="error-container" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+      </div>
+      <div class="upload-image-container">
+          <label for="file">Загрузите баннер: </label>
+          <div class="col-container">
+              <input type="file" accept="image/*" id="file" name="file" required>
+          </div>
+      </div>
+      <div class="submit-button-container">
+          <input type="submit" value="Добавить">
+      </div>
+  </form>
+</div>
+</body>
+</html>

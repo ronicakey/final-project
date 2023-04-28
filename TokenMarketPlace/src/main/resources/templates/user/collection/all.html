@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Коллекции</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<h1>Мой кабинет</h1>
+<div class="main-container">
+    <div th:insert="~{fragments :: userButtonPanel}">
+    </div>
+    <h2 class="page-header-h2">Мои коллекции</h2>
+    <form th:method="GET" th:action="@{/user/collections}">
+        <div class="grid-container">
+            <div th:insert="~{fragments :: collectionList}">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

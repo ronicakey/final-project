@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<h1>Корзина</h1>
+<div class="main-container">
+    <form th:method="GET" th:action="@{/user/cart}">
+        <div class="grid-container">
+            <div th:insert="~{fragments :: tokenList}">
+            </div>
+            <div class="cart-result" th:if="${not #lists.isEmpty(tokens)}">
+                <h3> Итого: <strong th:text="${total} "/> ETH</h3>
+                <a href="/user/order/create">
+                    <button type="button">Оформить заказ</button>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Созданные токены</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<h1>Мой кабинет</h1>
+<div class="main-container">
+    <div th:insert="~{fragments :: userButtonPanel}">
+    </div>
+    <h2 class="page-header-h2">Созданные мной токены</h2>
+    <form th:method="GET" th:action="@{/user/token/created}">
+        <div class="grid-container">
+            <div th:insert="~{fragments :: tokenList}">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

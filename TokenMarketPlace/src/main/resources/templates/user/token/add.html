@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый токен</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<div class="main-form-container">
+    <h3>Новый токен</h3>
+    <form class="login-container" th:method="POST" th:action="@{/user/token/new}" th:object="${token}" enctype="multipart/form-data">
+        <div class="row-container">
+            <label for="title">Название: </label>
+            <div class="col-container">
+                <input type="text" th:field="*{title}" placeholder="Название" id="title" required>
+            </div>
+        </div>
+        <div class="error-container" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+        </div>
+        <div class="row-container">
+            <label for="description">Описание: </label>
+            <div class="col-container">
+                <textarea th:field="*{description}" placeholder="Описание" id="description" required></textarea>
+            </div>
+        </div>
+        <div class="error-container" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+        </div>
+        <div class="row-container">
+            <label for="collection">Коллекция: </label>
+            <div class="col-container">
+                <select name="collection" th:field="*{collection}" id="collection" required>
+                    <option th:each="collection : ${collections}"
+                            th:value="${collection.getId()}" th:text="${collection.getTitle()}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row-container">
+            <label for="rarityRank">Редкость: </label>
+            <div class="col-container">
+                <select name="rarityRank" th:field="*{rarityRank}" id="rarityRank" required>
+                    <option th:each="rank : ${T(com.example.finalproject.enumm.RarityRank).values()}"
+                            th:value="${rank}" th:text="${rank.getLabel()}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="upload-image-container">
+            <label for="file">Загрузите токен: </label>
+            <div class="col-container">
+                <input type="file" accept="image/*" id="file" name="file" required>
+            </div>
+        </div>
+        <div class="submit-button-container">
+            <input type="submit" value="Добавить">
+        </div>
+    </form>
+</div>
+</body>
+</html>

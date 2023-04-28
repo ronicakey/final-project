@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход</title>
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<div class="main-form-container">
+  <h3>Вход</h3>
+  <form class="login-container" method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <div class="row-container">
+      <label for="username">Логин: </label>
+      <div class="col-container">
+        <input type="text" id="username" name="username" placeholder="Введите логин" required>
+      </div>
+    </div>
+    <div class="row-container">
+      <label for="password">Пароль: </label>
+      <div class="col-container">
+        <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+      </div>
+    </div>
+    <div class="error-container" th:if="${param.error}">
+      Неправильный логин или пароль
+    </div>
+    <div class="submit-button-container">
+      <input type="submit" value="Войти">
+      <br>
+      <a href="/register">Зарегистрироваться</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр коллекции</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<form th:method="GET" th:action="@{/collection/info/{id}}">
+    <div class="collection-header">
+        <img class="banner" th:src="'/img/' + ${collection.getBanner()}">
+        <div class="collection-info-container">
+            <p> Коллекция: <strong th:text="${collection.getTitle()}"/></p>
+            <p> Автор: <strong th:text="${collection.getCreator().getLogin()}"/></p>
+            <p> Всего токенов: <strong th:text=" ${collection.getCount()}"/></p>
+        </div>
+    </div>
+    <div class="main-container">
+        <div th:insert="~{fragments :: tokenList}">
+        </div>
+    </div>
+</form>
+</body>
+</html>

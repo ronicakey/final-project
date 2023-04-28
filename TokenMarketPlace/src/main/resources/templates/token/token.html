@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о токене</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<form th:method="GET" th:action="@{/token/info/{id}}">
+    <div class="token-main-container">
+        <div class="token-image-container">
+            <img th:src="'/img/' + ${token.getImage()}" width="500px">
+        </div>
+        <div class="token-info-container">
+            <div class="token-info">
+                <strong th:text="${token.getTitle()}"/>
+                <div class="smaller-info">
+                    <p>Коллекция: <a th:href="@{/collection/info/{id}(id=${token.getCollection().getId()})}">
+                        <strong th:text="${token.getCollection().getTitle()}"/></a>
+                    </p>
+                    <p> Создатель: <strong th:text="${token.getCreator().getLogin()}"/></p>
+                    <p> Владелец: <strong th:text="${token.getOwner().getLogin()}"/></p>
+                    <p th:text="'Описание: ' + ${token.getDescription()}"></p>
+                    <p th:text="'Редкость: ' + ${token.getRarityRank().getLabel()}"></p>
+                </div>
+            </div>
+            <div>
+                <div class="token-price">
+                    <div th:if="${token.getTokenStatus() == T(com.example.finalproject.enumm.TokenStatus).FOR_SALE}">
+                        <p> Цена: <strong th:text="${token.getPrice()}"/> ETH</p>
+                    </div>
+                </div>
+                <div class="token-button-container">
+                    <div th:insert="~{fragments :: userTokenButtons}">
+                    </div>
+                    <div th:insert="~{fragments :: adminTokenButtons}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

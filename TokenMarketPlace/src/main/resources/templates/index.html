@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Главная страница</title>
+  <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments :: header}">
+</div>
+<h1>Главная страница</h1>
+
+<div class="main-container">
+  <form th:method="GET" th:action="@{/index}">
+    <div class="search-panel">
+      <div class="token-search-form">
+        <div>
+          <label for="keyword">Поиск по названию: </label>
+          <input type="search" id="keyword" name="keyword" th:value="*{keyword}">
+        </div>
+        <div class="price-input-container">
+          <label for="min">Цена </label>
+          <div class="number-input-container">
+            <label for="min">от: </label>
+            <div class="number-container">
+              <input type="number" name="min" id="min" th:value="*{min}" step="0.01">
+            </div>
+          </div>
+          <div class="number-input-container">
+            <label for="max">до: </label>
+            <div class="number-container">
+              <input type="number" name="max" id="max" th:value="*{max}" step="0.01">
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="collection">Коллекция:</label>
+          <select name="collection" id="collection" >
+            <option></option>
+            <option th:each="element : ${collections}"
+                    th:text="${element.getTitle()}" th:value="${element.getId()}">
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="rarity">Редкость:</label>
+          <select name="rarity" id="rarity">
+            <option></option>
+            <option th:each="element : ${T(com.example.finalproject.enumm.RarityRank).values()}"
+                    th:text="${element.getLabel()}" th:value="${element}">
+            </option>
+          </select>
+        </div>
+        <div class="sorting">
+          <label for="sorting">Сортировка:</label>
+          <select name="sorting" id="sorting" >
+            <option value="default">По умолчанию</option>
+            <option value="asc_title">По алфавиту</option>
+            <option value="asc_price">По возрастанию цены</option>
+            <option value="desc_price">По убыванию цены</option>
+            <option value="asc_rarity">Сначала обычные</option>
+            <option value="desc_rarity">Сначала самые редкие</option>
+            <option value="desc_time">По обновлению</option>
+          </select>
+        </div>
+        <div>
+          <input type="submit" value="Применить">
+          <a href="/index">
+            <button type="button">Очистить</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div th:insert="~{fragments :: tokenList}">
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
